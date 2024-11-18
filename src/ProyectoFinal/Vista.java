@@ -4,19 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.DocumentEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 public class Vista {
@@ -56,7 +53,9 @@ public class Vista {
 		frame.setBounds(100, 100, 386, 356);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
 		frame.setTitle("Proyecto Espejo");
+		
 		
 		JLabel lblNewLabel = new JLabel("Original");
 		lblNewLabel.setBounds(10, 11, 103, 14);
@@ -155,17 +154,17 @@ public class Vista {
 		textField_1.setBounds(265, 138, 86, 20);
 		textField_1.setEnabled(false);
 		frame.getContentPane().add(textField_1);
-		textField.getDocument().addDocumentListener(new DocumentListener() {
-		public void changedUpdate(DocumentEvent e) { textField_1.setText(textField.getText()); }
-		public void removeUpdate(DocumentEvent e) { textField_1.setText(textField.getText()); }
-		public void insertUpdate(DocumentEvent e) { textField_1.setText(textField.getText()); }
+		textField.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) { textField_1.setText(textField.getText()); }
+			public void keyReleased(KeyEvent e) { textField_1.setText(textField.getText()); }
+			public void keyPressed(KeyEvent e) { textField_1.setText(textField.getText()); }
 		});
-		/*
-		textField_1.getDocument().addDocumentListener(new DocumentListener() {
-		public void changedUpdate(DocumentEvent e) { textField.setText(textField_1.getText()); }
-		public void removeUpdate(DocumentEvent e) { textField.setText(textField_1.getText()); }
-		public void insertUpdate(DocumentEvent e) { textField.setText(textField_1.getText()); }
-		}); */
+		
+		textField_1.addKeyListener(new KeyListener() {
+			public void keyTyped(KeyEvent e) { textField.setText(textField_1.getText()); }
+			public void keyReleased(KeyEvent e) { textField.setText(textField_1.getText()); }
+			public void keyPressed(KeyEvent e) { textField.setText(textField_1.getText()); }
+		});
 		
 		JComboBox comboBox_1 = new JComboBox();
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"item 1", "item 2", "item 3"}));
